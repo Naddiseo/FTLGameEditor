@@ -69,8 +69,17 @@ class Program(object):
         
     
     def _read_index(self):
-        self.f.seek(24, 0)
-        self.offset += 24
+        version = self._read_long()
+        difficulty = self._read_long()
+        ship_defeated = self._read_long()
+        jumps = self._read_long()
+        scrap_collected = self._read_long()
+        crew_recruited = self._read_long()
+        print "version: " + str(version)
+        print "difficulty: " + str(difficulty)
+        print "jumps: " + str(jumps)
+        print "total scrap collected: " + str(scrap_collected)
+        print "total crew recuited: " + str(crew_recruited)
         #header = struct.unpack('<L', self.f.read(24))[0]
         tittle_length, ship_title = self._read_section()
         #not sure why these repeat 
@@ -111,7 +120,8 @@ class Program(object):
         current_crew_size = self._read_long()
         for i in xrange(current_crew_size):
             self._read_crew_current_info()
-        print "offset" + str(self.offset)
+        ship_total_power = self._read_long()
+        print "ship total power: " + str(ship_total_power)
         
         
     def parse_args(self):
