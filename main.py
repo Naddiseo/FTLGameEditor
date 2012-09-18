@@ -31,11 +31,39 @@ class Program(object):
         stat_info = struct.unpack('<L', self.f.read(4))[0]
         return (stat, stat_info)
     
-    def _read_crew_basic_info(self):
+    def _read_crew_start_info(self):
         #should eventually return a crew member
         species_length, species = self._read_section()
         name_length, name = self._read_section()
-        print name + ": " + species
+        print "\t"+ name + ": " + species
+    
+    def _read_crew_current_info(self):
+        name_length, name = self._read_section()
+        species_length, species = self._read_section()
+        unsure_info = self._read_long()
+        health = self._read_long()
+        X = self._read_long()
+        Y = self._read_long()
+        Room = self._read_long()
+        Room_tile = self._read_long()
+        unsure_info2 = self._read_long()
+        Piloting = self._read_long()
+        Engines = self._read_long()
+        Shields = self._read_long()
+        Weapons = self._read_long()
+        Repair = self._read_long()
+        Combat = self._read_long()
+        Gender = self._read_long()
+        stat_repair = self._read_long()
+        stat_combat = self._read_long()
+        stat_pilot_eva = self._read_long()
+        stat_jumps_survived = self._read_long()
+        stat_skill_masteries = self._read_long()
+        print "\t" + name
+        print "\t\tPiloting:" + str(Piloting)
+        print "\t\tEngines:" + str(Engines)
+        print "\t\tShields:" + str(Shields)
+        print "\t\tWeapons:" + str(Weapons)
         
     
     def _read_index(self):
@@ -64,7 +92,22 @@ class Program(object):
         crew_size = self._read_long()
         print "Crew size: " + str(crew_size)
         for i in xrange(crew_size):
-            self._read_crew_basic_info()
+            self._read_crew_start_info()
+        ship_health = self._read_long()
+        print "ship health: " + str(ship_health)
+        ship_fuel = self._read_long()
+        print "ship health: " + str(ship_fuel)
+        ship_drone_parts = self._read_long()
+        print "drone parts: " + str(ship_drone_parts)
+        ship_missiles = self._read_long()
+        print "drone parts: " + str(ship_missiles)
+        spare_parts = self._read_long()
+        print "spare parts: " + str(spare_parts)
+        
+        #current crew info
+        current_crew_size = self._read_long()
+        for i in xrange(current_crew_size):
+            self._read_crew_current_info()
         
         
     def parse_args(self):
