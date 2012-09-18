@@ -25,10 +25,12 @@ class Program(object):
         L = struct.unpack('<L', self.f.read(4))[0]
         self.offset += 4
         return L
+    
     def _read_stat(self):
         stat_length, stat = self._read_section()
         #stat_info_length = struct.unpack('<L', self.f.read(4))[0]
         stat_info = struct.unpack('<L', self.f.read(4))[0]
+        self.offset += 4
         return (stat, stat_info)
     
     def _read_crew_start_info(self):
@@ -77,6 +79,7 @@ class Program(object):
         print ship_info
         rando_stat_length = struct.unpack('<L', self.f.read(4))[0]
         rando_stat = struct.unpack('<L', self.f.read(4))[0]
+        self.offset += 8
         stats_size = self._read_long()
         #print stats_size
         for i in xrange(stats_size):
@@ -108,6 +111,7 @@ class Program(object):
         current_crew_size = self._read_long()
         for i in xrange(current_crew_size):
             self._read_crew_current_info()
+        print "offset" + str(self.offset)
         
         
     def parse_args(self):
