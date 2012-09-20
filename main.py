@@ -67,6 +67,8 @@ class Program(object):
         print "\t\tShields:" + str(Shields)
         print "\t\tWeapons:" + str(Weapons)
         
+    def print_offset(self):
+        print "offset: " + str(self.offset)
     
     def _read_index(self):
         version = self._read_long()
@@ -112,9 +114,10 @@ class Program(object):
         ship_drone_parts = self._read_long()
         print "drone parts: " + str(ship_drone_parts)
         ship_missiles = self._read_long()
-        print "drone parts: " + str(ship_missiles)
+        print "missiles: " + str(ship_missiles)
         spare_parts = self._read_long()
         print "spare parts: " + str(spare_parts)
+        
         
         #current crew info
         current_crew_size = self._read_long()
@@ -122,7 +125,19 @@ class Program(object):
             self._read_crew_current_info()
         ship_total_power = self._read_long()
         print "ship total power: " + str(ship_total_power)
+        active_systems_length = self._read_long()
+        print "possible: systems activated: " + str(active_systems_length)
+        shields_power = self._read_long()
+        #level is else where.  this is just current power
+        print "shields power: " + str(shields_power)
+        shields_damage = self._read_long()
+        print "shields damage: " + str(shields_damage)
+        shields_down_time = self._read_long()
+        print "shields down time: " + str(shields_down_time)
+        not_sure = self._read_long()
+        print "unknown: " + str(not_sure)
         
+        self.print_offset()
         
     def parse_args(self):
         parser = argparse.ArgumentParser()
