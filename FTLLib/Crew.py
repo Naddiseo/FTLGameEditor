@@ -31,35 +31,33 @@ class Crew(object):
 		self.stat_skill_masteries = 0
 	
 	def __str__(self):
-		return '''\
-			{self.name}
-			{self.species}
-			
-			{self.unknown_attr1}
-			{self.health}
-			{self.x}
-			{self.y}
-			{self.room}
-			{self.room_tile}
-			{self.unknown_attr2}
-			
-			{self.skills} = {{
-				'piloting' : 0,
-				'engines' : 0,
-				'shields' : 0,
-				'weapons' : 0,
-				'repair' : 0,
-				'combat' : 0,
-			}}
-			
-			{self.gender}
-			
-			{self.stat_repair}
-			{self.stat_combat}
-			{self.stat_pilot_eva}
-			{self.stat_jumps_survived}
-			{self.stat_skill_masteries}
-		'''
+		return '''
+		----------------------------------
+		{self.name} ({self.species})
+		
+		Unknown Attribute1: {self.unknown_attr1}
+		Health: {self.health}
+		Coords: {self.x}, {self.y}
+		Room: {self.room} Tile:	{self.room_tile}
+		Unknown Attribute2: {self.unknown_attr2}
+		
+		Skills = {{
+			piloting : {self.skills[piloting]},
+			engines : {self.skills[engines]},
+			shields : {self.skills[shields]},
+			weapons : {self.skills[weapons]},
+			repair : {self.skills[repair]},
+			combat : {self.skills[combat]},
+		}}
+		
+		Gender: {self.gender}
+		
+		Stat Repair: {self.stat_repair}
+		Stat Combat: {self.stat_combat}
+		Stat Pilot: {self.stat_pilot_eva}
+		Stat Jumps Survived: {self.stat_jumps_survived}
+		Stat Skill Masteries: {self.stat_skill_masteries}
+		----------------------------------------'''.format(self = self)
 	
 	def read_file(self, save_file):
 		self.name = save_file.read_string()

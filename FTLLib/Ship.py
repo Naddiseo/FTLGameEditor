@@ -35,8 +35,7 @@ class Ship(object):
 	
 	def __str__(self):
 		return '''\
-	Default Name: {self.name}
-	Default Model: {self.ship_model}
+	Default Name: {self.name} (Default Model: {self.ship_model})
 	
 	Unknown Stat1: {self.unknown_stat1}
 	Unknown Stat2: {self.unknown_stat2}
@@ -48,24 +47,28 @@ class Ship(object):
 	Model2: {self.ship_model3}
 	
 	Starting Crew Size: {self.crew_size}
-	Starting Crew: {self.start_crew}
+	Starting Crew: {start_crew}
 	
-	{self.health}
-	{self.fuel}
-	{self.drone_parts}
-	{self.missiles}
-	{self.spare_parts}
+	Health: {self.health}
+	Fuel: {self.fuel}
+	Drone parts: {self.drone_parts}
+	Missles: {self.missiles}
+	Spare parts: {self.spare_parts}
 	
-	{self.current_crew_size}
-	{self.current_crew}
+	Current Crew Size: {self.current_crew_size}
+	{current_crew}
 	
-	{self.ship_total_power}
-	{self.active_systems_length}
-	{self.shields_power}
-	{self.shields_damage}
-	{self.shields_downtime}
-	{self.unknown_stat3}
-		'''.format(self = self)
+	Total Power: {self.ship_total_power}
+	Active Systems Count: {self.active_systems_length}
+	Shield Power: {self.shields_power}
+	Shield Damage: {self.shields_damage}
+	Shield Downtime: {self.shields_downtime}
+	Unknown Stat3: {self.unknown_stat3}
+		'''.format(
+			self = self,
+			current_crew = '\n'.join(str(crew) for crew in self.current_crew.values()),
+			start_crew = ', '.join(self.start_crew.keys()),
+		)
 	
 	def read_ship_info(self, save_file):
 		self.name = save_file.read_string()
